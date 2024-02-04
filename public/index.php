@@ -8,25 +8,27 @@
 
     session_start();
 
-    if (!isset($_SESSION['perfil'])) {
-        $_SESSION['perfil'] = "invitado";
+    if (!isset($_SESSION["perfil"])) {
+        $_SESSION["perfil"] = "invitado";
     }
 
     $router = new Router();
-    $router->add(array(
-        "name" => "home",
-        "path" => "/^\/$/",
-        "action" => [ContactosController::class, "indexAction"],
-        "auth" => ["invitado", "usuario"])
+    $router->add(
+        array(
+            "name" => "home",
+            "path" => "/^\/$/",
+            "action" => [ContactosController::class, "indexAction"],
+            "auth" => ["invitado", "usuario"]
+        )
     );
 
-    $request = $_SERVER['REQUEST_URI'];
+    $request = $_SERVER["REQUEST_URI"];
     $route = $router->match($request);
-    
+
     if ($route) {
-        if (in_array($_SESSION['perfil'], $route['auth'])) {
-            $className = $route['action'][0];
-            $classMethod = $route['action'][1];
+        if (in_array($_SESSION["perfil"], $route["auth"])) {
+            $className = $route["action"][0];
+            $classMethod = $route["action"][1];
             $object = new $className;
             $object->$classMethod($request);
         } else {

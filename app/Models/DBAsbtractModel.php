@@ -1,16 +1,16 @@
 <?php
     namespace App\Models;
-    
+
     use PDO;
     use PDOException;
 
     abstract class DBAsbtractModel
     {
-        private static $db_host = DBHOST; // database en docker
-        private static $db_user = DBUSER;
-        private static $db_pass = DBPASS;
-        private static $db_name = DBNAME;
-        private static $db_port = DBPORT;
+        private static $dbHost = DBHOST; // database en docker
+        private static $dbUser = DBUSER;
+        private static $dbPass = DBPASS;
+        private static $dbName = DBNAME;
+        private static $dbPort = DBPORT;
 
         public $message = "";
         protected $conn; // Manejador de la BD
@@ -27,16 +27,16 @@
         abstract protected function delete();
 
         # Crear conexión a la base de datos
-        protected function open_connection()
+        protected function openConnection()
         {
-            $dsn = "mysql:host=" . self::$db_host . ";"
-                . "dbname=" . self::$db_name . ";"
-                . "port=" . self::$db_port;
+            $dsn = "mysql:host=" . self::$dbHost . ";"
+                . "dbname=" . self::$dbName . ";"
+                . "port=" . self::$dbPort;
             try {
                 return $this->conn = new PDO(
                     $dsn,
-                    self::$db_user,
-                    self::$db_pass,
+                    self::$dbUser,
+                    self::$dbPass,
                     array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8")
                 );
             } catch (PDOException $e) {
@@ -46,20 +46,23 @@
         }
 
         # Método que devuelve el último id introducido.
-        public function lastInsert() {
+        public function lastInsert()
+        {
             return $this->conn->lastInsertId();
         }
 
         # Desconectar la base de datos
-        private function close_connection() {
+        private function closeConnection()
+        {
             $this->conn = null;
         }
 
         # Traer resultados de una consulta en un Array
         # Consulta que devuelve tuplas de la tabla.
-        protected function get_results_from_query() {
-            $this->open_connection();
-            if (($_stmt = $this->conn->prepare($this->query))) {
+        protected function getResultsFromQuery()
+        {
+            $this->openConnection();
+            if ($_stmt = $this->conn->prepare($this->query)) {
                 # PREG_PATTERN_ORDER flag para especificar como se cargan los resultados en $named.
                 if (preg_match_all('/(:\w+)/', $this->query, $_named, PREG_PATTERN_ORDER)) {
                     $_named = array_pop($_named);
@@ -81,5 +84,3 @@
             }
         }
     }
-
-?>

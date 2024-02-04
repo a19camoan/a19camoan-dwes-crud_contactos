@@ -1,11 +1,12 @@
 <?php
-
     namespace App\Models;
 
-    class Usuarios extends DBAsbtractModel {
+    class Usuarios extends DBAsbtractModel
+    {
         private static $instancia;
 
-        public static function getInstancia() {
+        public static function getInstancia()
+        {
             if (!isset(self::$instancia)) {
                 $miclase = __CLASS__;
                 self::$instancia = new $miclase;
@@ -13,18 +14,20 @@
             return self::$instancia;
         }
 
-        public function __clone() {
+        public function __clone()
+        {
             trigger_error('La clonación no está permitida', E_USER_ERROR);
         }
 
-        public function login($usuario, $password) {
+        public function login($usuario, $password)
+        {
             $this->query = "SELECT * FROM usuarios WHERE usuario = :usuario AND password = :password";
             $this->params['usuario'] = $usuario;
             $this->params['password'] = $password;
 
-            $this->get_results_from_query();
+            $this->getResultsFromQuery();
             if (count($this->rows) == 1) {
-                foreach ($this->rows[0] as $propiedad=>$valor) {
+                foreach ($this->rows[0] as $propiedad => $valor) {
                     $this->$propiedad = $valor;
                 }
                 $this->mensaje = "sh encontrado";
@@ -35,9 +38,20 @@
             return $this->rows[0] ?? null;
         }
 
-        public function get($id="") {}
-        public function set() {}
-        public function edit() {}
-        public function delete() {}
+        public function get($id = "")
+        {
+            # Not implemented
+        }
+        public function set()
+        {
+            # Not implemented
+        }
+        public function edit()
+        {
+            # Not implemented
+        }
+        public function delete()
+        {
+            # Not implemented
+        }
     }
-?>

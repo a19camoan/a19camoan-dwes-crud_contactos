@@ -50,8 +50,10 @@
                         </td>
                         <?php
                             if ($_SESSION["perfil"] == "usuario") {
-                                echo "<td colspan='3'><a href='http://localhost/contactos/editar/" . $contacto["id"] . "'>📝</a></td>";
-                                echo "<td colspan='3'><a href='http://localhost/contactos/borrar/" . $contacto["id"] . "'>🗑️</a></td>";
+                                echo "<td colspan='3'><a href='http://localhost/contactos/editar/"
+                                    . $contacto["id"] . "'>📝</a></td>";
+                                echo "<td colspan='3'><a href='http://localhost/contactos/borrar/"
+                                    . $contacto["id"] . "'>🗑️</a></td>";
                             }
                         ?>
                     </tr>
