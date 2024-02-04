@@ -1,0 +1,7 @@
+# Ejemplo de .env
+
+DBHOST = "localhost"
+DBUSER = "root"
+DBPASS = "root"
+DBNAME = "test"
+DBPORT = "3306"
