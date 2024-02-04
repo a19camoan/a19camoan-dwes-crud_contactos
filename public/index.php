@@ -1,8 +1,6 @@
 <?php
     use App\Core\Router;
     use App\Controllers\ContactosController;
-    use App\Controllers\IndexController;
-
 
     require_once "../bootstrap.php";
 
@@ -14,12 +12,20 @@
 
     $router = new Router();
     $router->add(
-        array(
+        [
             "name" => "home",
             "path" => "/^\/$/",
             "action" => [ContactosController::class, "indexAction"],
             "auth" => ["invitado", "usuario"]
-        )
+        ]
+    );
+    $router->add(
+        [
+            "name" => "login",
+            "path" => "/^\/login$/",
+            "action" => [ContactosController::class, "loginAction"],
+            "auth" => ["invitado"]
+        ]
     );
 
     $request = $_SERVER["REQUEST_URI"];
@@ -35,5 +41,5 @@
             echo "No autorizado";
         }
     } else {
-        echo "No encontrado";
+        include_once "../app/Views/404_view.php";
     }

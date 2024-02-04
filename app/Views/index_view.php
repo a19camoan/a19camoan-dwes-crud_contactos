@@ -17,6 +17,11 @@
             <ul>
                 <a href="http://localhost">
                     <li>Home</li>
+                    <?php if ($_SESSION["perfil"] == "invitado"): ?>
+                        <a href="http://localhost/login">
+                            <li>Login</li>
+                        </a>
+                    <?php endif ?>
                 </a>
             </ul>
         </nav>

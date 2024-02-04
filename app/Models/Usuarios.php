@@ -16,14 +16,15 @@
 
         public function __clone()
         {
-            trigger_error('La clonación no está permitida', E_USER_ERROR);
+            trigger_error("La clonación no está permitida", E_USER_ERROR);
         }
 
         public function login($usuario, $password)
         {
+            # password_verify()
             $this->query = "SELECT * FROM usuarios WHERE usuario = :usuario AND password = :password";
-            $this->params['usuario'] = $usuario;
-            $this->params['password'] = $password;
+            $this->params["usuario"] = $usuario;
+            $this->params["password"] = $password;
 
             $this->getResultsFromQuery();
             if (count($this->rows) == 1) {

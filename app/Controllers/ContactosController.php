@@ -11,4 +11,9 @@
             $data = ["contacto" => $contacto->getAll()];
             $this->renderHTML("../app/Views/index_view.php", $data);
         }
+
+        public function loginAction($request)
+        {
+            $this->renderHTML("../app/Views/login_view.php");
+        }
     }
