@@ -24,58 +24,54 @@
     <main>
         <aside>
             <?php
-                if ($data["perfil"] == "invitado") {
-                    include_once "include/login_view.php";
-                } else {
-                    echo "<p>Bienvenido " . $_SESSION["usuario"]["usuario"] . "</p>";
-                    echo "<a href='http://localhost/logout'>Cerrar sesión</a>";
-                }
+            if ($data["perfil"] == "invitado") {
+                include_once "include/login_view.php";
+            } else {
+                echo "<p>Bienvenido " . $_SESSION["usuario"]["usuario"] . "</p>";
+                echo "<a href='http://localhost/logout'>Cerrar sesión</a>";
+            }
             ?>
-        <div>
-            <p>Información de cuenta:
-                <?php echo $data["perfil"] ?>
-        </div>
-        <h2>Listado de contactos</h2>
-        <table border="1">
-            <caption>Contactos</caption>
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Teléfono</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($data["contacto"] as $contacto): ?>
+            <h2>Listado de contactos</h2>
+            <table border="1">
+                <caption>Contactos</caption>
+                <thead>
                     <tr>
-                        <td>
-                            <?php echo $contacto["nombre"] ?>
-                        </td>
-                        <td>
-                            <?php echo $contacto["telefono"] ?>
-                        </td>
-                        <td>
-                            <?php echo $contacto["email"] ?>
-                        </td>
-                        <?php
-                            if ($data["perfil"] == "usuario") {
-                                echo "<td colspan='3'><a href='http://localhost/contactos/edit/"
-                                    . $contacto["id"] . "'>📝</a></td>";
-                                echo "<td colspan='3'><a href='http://localhost/contactos/del/"
-                                    . $contacto["id"] . "'>🗑️</a></td>";
-                            }
-                        ?>
+                        <th>Nombre</th>
+                        <th>Teléfono</th>
+                        <th>Email</th>
                     </tr>
-                <?php endforeach ?>
-                <?php if ($data["perfil"] == "usuario"): ?>
-                    <tr>
-                        <td colspan="6">
-                            <a href="http://localhost/add">Agregar contacto</a>
-                        </td>
-                    </tr>
-                <?php endif ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php foreach ($data["contacto"] as $contacto): ?>
+                        <tr>
+                            <td>
+                                <?php echo $contacto["nombre"] ?>
+                            </td>
+                            <td>
+                                <?php echo $contacto["telefono"] ?>
+                            </td>
+                            <td>
+                                <?php echo $contacto["email"] ?>
+                            </td>
+                            <?php
+                                if ($data["perfil"] == "usuario") {
+                                    echo "<td colspan='3'><a href='http://localhost/contactos/edit/"
+                                        . $contacto["id"] . "'>📝</a></td>";
+                                    echo "<td colspan='3'><a href='http://localhost/contactos/del/"
+                                        . $contacto["id"] . "'>🗑️</a></td>";
+                                }
+                            ?>
+                        </tr>
+                    <?php endforeach ?>
+                    <?php if ($data["perfil"] == "usuario"): ?>
+                        <tr>
+                            <td colspan="6">
+                                <a href="http://localhost/add">Agregar contacto</a>
+                            </td>
+                        </tr>
+                    <?php endif ?>
+                </tbody>
+            </table>
     </main>
     <footer>
         <p>Agenda - 2024</p>

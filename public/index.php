@@ -55,7 +55,7 @@
             $object = new $className;
             $object->$classMethod($request);
         } else {
-            echo "No autorizado";
+            include_once "../app/Views/403_view.php";
         }
     } else {
         include_once "../app/Views/404_view.php";
