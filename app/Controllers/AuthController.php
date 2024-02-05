@@ -1,9 +1,8 @@
 <?php
     namespace App\Controllers;
-    use App\Controllers\BaseController;
     use App\Models\Usuarios;
 
-    class AuthController extends BaseController
+    class AuthController
     {
         public function loginAction()
         {
@@ -16,10 +15,10 @@
 
                 if ($auth) {
                     $_SESSION["perfil"] = "usuario";
-                    $_SESION["usuario"] = $auth;
+                    $_SESSION["usuario"] = $auth;
                 }
             }
-            header("Location: /");
+            header("Location: http://localhost");
         }
 
         public function logoutAction()

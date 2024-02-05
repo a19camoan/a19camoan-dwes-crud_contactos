@@ -27,7 +27,7 @@
                 if ($data["perfil"] == "invitado") {
                     include_once "include/login_view.php";
                 } else {
-                    echo "<p>Bienvenido " . $_SESSION["usuario"] . "</p>";
+                    echo "<p>Bienvenido " . $_SESSION["usuario"]["usuario"] . "</p>";
                     echo "<a href='http://localhost/logout'>Cerrar sesión</a>";
                 }
             ?>
@@ -58,7 +58,7 @@
                             <?php echo $contacto["email"] ?>
                         </td>
                         <?php
-                            if ($_SESSION["perfil"] == "usuario") {
+                            if ($data["perfil"] == "usuario") {
                                 echo "<td colspan='3'><a href='http://localhost/contactos/edit/"
                                     . $contacto["id"] . "'>📝</a></td>";
                                 echo "<td colspan='3'><a href='http://localhost/contactos/del/"
@@ -67,6 +67,13 @@
                         ?>
                     </tr>
                 <?php endforeach ?>
+                <?php if ($data["perfil"] == "usuario"): ?>
+                    <tr>
+                        <td colspan="6">
+                            <a href="http://localhost/add">Agregar contacto</a>
+                        </td>
+                    </tr>
+                <?php endif ?>
             </tbody>
         </table>
     </main>

@@ -36,6 +36,14 @@
             "auth" => ["invitado", "usuario"]
         ]
     );
+    $router->add(
+        [
+            "name" => "add",
+            "path" => "/^\/add$/",
+            "action" => [ContactosController::class, "setAction"],
+            "auth" => ["usuario"]
+        ]
+    );
 
     $request = $_SERVER["REQUEST_URI"];
     $route = $router->match($request);
