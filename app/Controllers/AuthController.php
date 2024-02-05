@@ -1,11 +1,13 @@
 <?php
     namespace App\Controllers;
+
     use App\Models\Usuarios;
 
     class AuthController
     {
         public function loginAction()
         {
+            ob_start();
             if (isset($_POST)) {
                 $user = $_POST["user"];
                 $password = $_POST["password"];
@@ -18,13 +20,14 @@
                     $_SESSION["usuario"] = $auth;
                 }
             }
-            header("Location: http://localhost");
+            header("Location: ../");
+            ob_end_flush();
         }
 
         public function logoutAction()
         {
             session_unset();
             session_destroy();
-            header("Location: /");
+            header("Location: ../");
         }
     }

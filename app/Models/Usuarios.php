@@ -42,23 +42,23 @@
         public function getByCredentials($usuario = "", $password = "")
         {
             if ($usuario != "" && $password != "") {
-                $this -> query = "SELECT * FROM usuarios
-                WHERE usuario = :usuario AND password = :password";
-                $this -> params["usuario"] = $usuario;
-                $this -> params["password"] = $password;
-                $this -> getResultsFromQuery();
+                $this->query = "SELECT * FROM usuarios
+                    WHERE usuario = :usuario AND password = :password";
+                $this->params["usuario"] = $usuario;
+                $this->params["password"] = $password;
+                $this->getResultsFromQuery();
             }
 
-            if (count($this -> rows) == 1) {
-                foreach ($this -> rows[0] as $propiedad => $valor) {
-                    $this -> $propiedad = $valor;
+            if (count($this->rows) == 1) {
+                foreach ($this->rows[0] as $propiedad => $valor) {
+                    $this->$propiedad = $valor;
                 }
-                $this -> mensaje = "Usuario encontrado";
+                $this->mensaje = "Usuario encontrado";
             } else {
-                $this -> mensaje = "Usuario no encontrado";
+                $this->mensaje = "Usuario no encontrado";
             }
 
-            return $this -> rows[0] ?? null;
+            return $this->rows[0] ?? null;
         }
 
         public function get($id = "")
