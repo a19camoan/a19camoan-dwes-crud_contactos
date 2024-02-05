@@ -36,7 +36,7 @@
         <form method="post" action="">
             <div>
                 <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required>
+                <input type="text" id="user" name="user" required>
             </div>
             <div>
                 <label for="password">Contraseña</label>

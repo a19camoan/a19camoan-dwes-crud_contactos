@@ -1,6 +1,7 @@
 <?php
     use App\Core\Router;
     use App\Controllers\ContactosController;
+    use App\Controllers\AuthController;
 
     require_once "../bootstrap.php";
 
@@ -23,8 +24,16 @@
         [
             "name" => "login",
             "path" => "/^\/login$/",
-            "action" => [ContactosController::class, "loginAction"],
-            "auth" => ["invitado"]
+            "action" => [AuthController::class, "loginAction"],
+            "auth" => ["invitado", "usuario"]
+        ]
+    );
+    $router->add(
+        [
+            "name" => "logout",
+            "path" => "/^\/logout$/",
+            "action" => [AuthController::class, "logoutAction"],
+            "auth" => ["invitado", "usuario"]
         ]
     );
 

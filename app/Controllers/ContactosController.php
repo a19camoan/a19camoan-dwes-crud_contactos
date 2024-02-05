@@ -9,6 +9,7 @@
         {
             $contacto = Contactos::getInstancia();
             $data = ["contacto" => $contacto->getAll()];
+            $data["perfil"] = $_SESSION["perfil"];
             $this->renderHTML("../app/Views/index_view.php", $data);
         }
 

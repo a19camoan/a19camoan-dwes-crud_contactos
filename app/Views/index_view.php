@@ -17,19 +17,23 @@
             <ul>
                 <a href="http://localhost">
                     <li>Home</li>
-                    <?php if ($_SESSION["perfil"] == "invitado"): ?>
-                        <a href="http://localhost/login">
-                            <li>Login</li>
-                        </a>
-                    <?php endif ?>
                 </a>
             </ul>
         </nav>
     </header>
     <main>
+        <aside>
+            <?php
+                if ($data["perfil"] == "invitado") {
+                    include_once "include/login_view.php";
+                } else {
+                    echo "<p>Bienvenido " . $_SESSION["usuario"] . "</p>";
+                    echo "<a href='http://localhost/logout'>Cerrar sesión</a>";
+                }
+            ?>
         <div>
             <p>Información de cuenta:
-                <?php echo $_SESSION["perfil"] ?>
+                <?php echo $data["perfil"] ?>
         </div>
         <h2>Listado de contactos</h2>
         <table border="1">
@@ -55,9 +59,9 @@
                         </td>
                         <?php
                             if ($_SESSION["perfil"] == "usuario") {
-                                echo "<td colspan='3'><a href='http://localhost/contactos/editar/"
+                                echo "<td colspan='3'><a href='http://localhost/contactos/edit/"
                                     . $contacto["id"] . "'>📝</a></td>";
-                                echo "<td colspan='3'><a href='http://localhost/contactos/borrar/"
+                                echo "<td colspan='3'><a href='http://localhost/contactos/del/"
                                     . $contacto["id"] . "'>🗑️</a></td>";
                             }
                         ?>
