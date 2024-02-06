@@ -44,6 +44,30 @@
             "auth" => ["usuario"]
         ]
     );
+    $router->add(
+        [
+            "name" => "delete",
+            "path" => "/^\/del\/(\d+)$/",
+            "action" => [ContactosController::class, "delAction"],
+            "auth" => ["usuario"]
+        ]
+    );
+    $router->add(
+        [
+            "name" => "delete confirm",
+            "path" => "/^\/delc\/(\d+)$/",
+            "action" => [ContactosController::class, "delCorfmAction"],
+            "auth" => ["usuario"]
+        ]
+    );
+    $router->add(
+        [
+            "name" => "edit",
+            "path" => "/^\/edit\/(\d+)$/",
+            "action" => [ContactosController::class, "editAction"],
+            "auth" => ["usuario"]
+        ]
+    );
 
     $request = $_SERVER["REQUEST_URI"];
     $route = $router->match($request);

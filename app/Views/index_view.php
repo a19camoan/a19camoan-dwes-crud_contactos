@@ -55,9 +55,9 @@
                             </td>
                             <?php
                                 if ($data["perfil"] == "usuario") {
-                                    echo "<td colspan='3'><a href='http://localhost/contactos/edit/"
+                                    echo "<td colspan='3'><a href='http://localhost/edit/"
                                         . $contacto["id"] . "'>📝</a></td>";
-                                    echo "<td colspan='3'><a href='http://localhost/contactos/del/"
+                                    echo "<td colspan='3'><a href='http://localhost/del/"
                                         . $contacto["id"] . "'>🗑️</a></td>";
                                 }
                             ?>

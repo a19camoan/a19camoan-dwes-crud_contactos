@@ -1,6 +1,7 @@
 <?php
     namespace App\Models;
 
+    #[\AllowDynamicProperties]
     class Contactos extends DBAsbtractModel
     {
         private static $instancia;
@@ -12,7 +13,7 @@
         private $createdAt;
         private $updatedAt;
 
-
+        
         public static function getInstancia()
         {
             if (!isset(self::$instancia)) {
@@ -91,7 +92,7 @@
             $this->params["telefono"] = $this->telefono;
             $this->params["email"] = $this->email;
             $this->getResultsFromQuery();
-            $this->mensaje = "SH añadido";
+            $this->mensaje = "Contacto añadido";
         }
 
         public function getAll()
@@ -113,34 +114,32 @@
                 foreach ($this->rows[0] as $propiedad => $valor) {
                     $this->$propiedad = $valor;
                 }
-                $this->mensaje = "SH encontrado";
+                $this->mensaje = "Contacto encontrado";
             } else {
-                $this->mensaje = "SH no encontrado";
+                $this->mensaje = "Contacto no encontrado";
             }
 
             return $this->rows[0] ?? null;
         }
 
-        public function edit($id = "", $user_data = array())
+        public function edit()
         {
-            $fecha = new \DateTime();
-
-            $this->query = "UPDATE contactos SET nombre=:nombre, telefono=:telefono, email=:email, updatedAt=:fecha WHERE id=:id";
+            $this->query = "UPDATE contactos SET nombre=:nombre, telefono=:telefono, email=:email WHERE id=:id";
 
             $this->params["id"] = $this->id;
             $this->params["nombre"] = $this->nombre;
             $this->params["telefono"] = $this->telefono;
             $this->params["email"] = $this->email;
-            $this->params["fecha"] = $fecha->format("Y-m-d H:i:s");
+            $this->getResultsFromQuery();
 
-            $this->mensaje = "SH modificado";
+            $this->mensaje = "Contacto modificado";
         }
 
         public function delete($id = "")
         {
-            $this->query = "DELETE FROM contactos WHERE id=:id";
+            $this->query = "DELETE FROM contactos WHERE id = :id";
             $this->params["id"] = $id;
             $this->getResultsFromQuery();
-            $this->mensaje = "SH eliminado";
+            $this->mensaje = "Contacto eliminado";
         }
     }
