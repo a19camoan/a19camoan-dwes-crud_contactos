@@ -68,6 +68,12 @@
             "auth" => ["usuario"]
         ]
     );
+    $router->add([
+        "name" => "search",
+        "path" => "/^\/search\?q=.+$/",
+        "action" => [ContactosController::class, "searchAction"],
+        "auth" => ["invitado","usuario"]
+    ]);
 
     $request = $_SERVER["REQUEST_URI"];
     $route = $router->match($request);

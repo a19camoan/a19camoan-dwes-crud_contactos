@@ -105,4 +105,12 @@
                 $this->renderHTML("../app/Views/not_contact_view.php", $data);
             }
         }
+
+        public function searchAction()
+        {
+            $data["perfil"] = $_SESSION["perfil"];
+            $contacto = Contactos::getInstancia();
+            $data["contacto"] = $contacto->getByAll($_GET["q"]);
+            $this->renderHTML("../app/Views/index_view.php", $data);
+        }
     }

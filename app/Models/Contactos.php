@@ -2,6 +2,12 @@
     namespace App\Models;
 
     #[\AllowDynamicProperties]
+    /**
+     * Represents a Contactos model.
+     *
+     * This class extends the DBAsbtractModel class and provides functionality
+     * for interacting with the Contactos table in the database.
+     */
     class Contactos extends DBAsbtractModel
     {
         private static $instancia;
@@ -28,7 +34,6 @@
             trigger_error("La clonación no está permitida", E_USER_ERROR);
         }
 
-
         #getter y setter de los atrubutos
         public function setId($id)
         {
@@ -38,7 +43,6 @@
         {
             return $this->id;
         }
-
 
         public function setNombre($nombre)
         {
@@ -85,7 +89,13 @@
             return $this->updatedAt;
         }
 
-        public function set($sh_data = array())
+        /**
+         * Sets the data for the Contactos model.
+         *
+         * @param array $sh_data The data to be set.
+         * @return void
+         */
+        public function set($sh_data = array()) : void
         {
             $this->query = "INSERT INTO contactos (nombre, telefono, email) VALUES (:nombre, :telefono, :email)";
             $this->params["nombre"] = $this->nombre;
@@ -95,14 +105,25 @@
             $this->mensaje = "Contacto añadido";
         }
 
-        public function getAll()
+        /**
+         * Retrieves all contact records.
+         *
+         * @return array An array containing all contact records.
+         */
+        public function getAll() : array
         {
             $this->query = "SELECT * FROM contactos";
             $this->getResultsFromQuery();
             return $this->rows;
         }
 
-        public function get($id = "")
+        /**
+         * Retrieves contact information.
+         *
+         * @param string $id The ID of the contact to retrieve. If empty, retrieves all contacts.
+         * @return array An array containing the contact information.
+         */
+        public function get($id = "") : array
         {
             if ($id != "") {
                 $this->query = "SELECT * FROM contactos WHERE id = :id";
@@ -122,7 +143,12 @@
             return $this->rows[0] ?? null;
         }
 
-        public function edit()
+        /**
+         * Edit the contact.
+         *
+         * @return void
+         */
+        public function edit() : void
         {
             $this->query = "UPDATE contactos SET nombre=:nombre, telefono=:telefono, email=:email WHERE id=:id";
 
@@ -135,11 +161,35 @@
             $this->mensaje = "Contacto modificado";
         }
 
-        public function delete($id = "")
+        /**
+         * Deletes a contact.
+         *
+         * @param string $id The ID of the contact to delete.
+         * @return void
+         */
+        public function delete($id = "") : void
         {
             $this->query = "DELETE FROM contactos WHERE id = :id";
             $this->params["id"] = $id;
             $this->getResultsFromQuery();
             $this->mensaje = "Contacto eliminado";
+        }
+
+        
+        /**
+         * Retrieves contact records based on the given name.
+         *
+         * @param string $nombre The name to search for (optional)
+         * @return array The contact records matching the given name
+         */
+        public function getByAll($nombre = "") : array
+        {
+            $this->query = "SELECT * FROM contactos
+            WHERE nombre LIKE :nombre OR telefono LIKE :telefono OR email LIKE :email";
+            $this->params["nombre"] = "%$nombre%";
+            $this->params["telefono"] = "%$nombre%";
+            $this->params["email"] = "%$nombre%";
+            $this->getResultsFromQuery();
+            return $this->rows;
         }
     }

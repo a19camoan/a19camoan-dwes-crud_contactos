@@ -20,6 +20,10 @@
                 </a>
             </ul>
         </nav>
+        <form action="http://localhost/search" method="get">
+            <input type="text" name="q" id="nombre" placeholder="Buscar contacto">
+            <input type="submit" value="Buscar">
+        </form>
     </header>
     <main>
         <aside>
