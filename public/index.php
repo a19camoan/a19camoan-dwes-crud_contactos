@@ -54,14 +54,6 @@
     );
     $router->add(
         [
-            "name" => "delete confirm",
-            "path" => "/^\/delc\/(\d+)$/",
-            "action" => [ContactosController::class, "delCorfmAction"],
-            "auth" => ["usuario"]
-        ]
-    );
-    $router->add(
-        [
             "name" => "edit",
             "path" => "/^\/edit\/(\d+)$/",
             "action" => [ContactosController::class, "editAction"],

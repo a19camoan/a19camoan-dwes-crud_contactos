@@ -3,77 +3,128 @@
     --primary: #FDF0D1;
     --secondary: #AC7D88;
     --tertiary: #85586F;
-    --quaternary: #85586F;
+    --accent: #643843;
 }
 
 body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--primary);
     color: var(--tertiary);
-    margin: 0;
-    padding: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    color: var(--secondary);
-}
-
-a {
-    color: var(--tertiary);
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
+    text-align: center;
 }
 
 header {
     background-color: var(--secondary);
     color: var(--primary);
-    padding: 20px 0;
-    text-align: center;
+    padding: 1rem;
 }
 
-header h1 {
-    margin: 0;
+nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
-nav ul {
-    list-style: none;
+ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     padding: 0;
-    margin: 0;
 }
 
-nav ul li {
-    display: inline;
-    margin: 0 10px;
+li {
+    list-style: none;
 }
 
-nav ul li a {
+nav li {
     color: var(--primary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-nav ul li a:hover {
-    text-decoration: underline;
+nav li:hover {
+    background-color: var(--tertiary);
+}
+
+a {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+aside {
+    background-color: var(--secondary);
+    color: var(--primary);
+    padding: 1rem;
 }
 
 main {
-    padding: 20px 0;
+    padding: 1rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+caption {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+th,
+td {
+    border: 1px solid var(--tertiary);
+    padding: 0.5rem;
+}
+
+td.add {
+    background-color: var(--secondary);
+    color: var(--primary);
+}
+
+th {
+    background-color: var(--tertiary);
+    color: var(--primary);
+}
+
+tr:nth-child(even) {
+    background-color: var(--secondary);
+}
+
+tr:nth-child(odd) {
+    background-color: var(--primary);
+}
+
+input[type='text'],
+input[type='email'],
+input[type='tel'],
+input[type='password'],
+input[type='submit'] {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
 }
 
 footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     background-color: var(--secondary);
     color: var(--primary);
-    padding: 20px 0;
-    text-align: center;
+    padding: 1rem;
 }
 
-footer p {
-    margin: 0;
+img {
+    width: 5vw;
+    height: 5vw;
+    margin: 1rem;
 }

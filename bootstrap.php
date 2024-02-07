@@ -10,3 +10,4 @@
     define("DBPASS", $_ENV["DBPASS"]);
     define("DBNAME", $_ENV["DBNAME"]);
     define("DBPORT", $_ENV["DBPORT"]);
+    define("REDIRECT_URL", "Location: http://" . $_SERVER["HTTP_HOST"] . "/");

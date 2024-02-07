@@ -3,8 +3,6 @@
 
     use App\Models\Contactos;
 
-    define("REDIRECT_URL", "Location: http://localhost");
-
     class ContactosController extends BaseController
     {
         public function indexAction($request)

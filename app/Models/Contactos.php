@@ -10,7 +10,7 @@
      */
     class Contactos extends DBAsbtractModel
     {
-        private static $instancia;
+        private static $instance;
 
         private $id;
         private $nombre;
@@ -19,83 +19,93 @@
         private $createdAt;
         private $updatedAt;
 
-        
-        public static function getInstancia()
+        /**
+         * Returns an instance of the Contactos class.
+         *
+         * @return Contactos The instance of the Contactos class.
+         */
+        public static function getInstancia(): Contactos
         {
-            if (!isset(self::$instancia)) {
+            if (!isset(self::$instance)) {
                 $miclase = __CLASS__;
-                self::$instancia = new $miclase;
+                self::$instance = new $miclase;
             }
-            return self::$instancia;
+            return self::$instance;
         }
 
-        public function __clone()
+        /**
+         * Prevents cloning of the Contactos object.
+         *
+         * @return void
+         */
+        public function __clone(): void
         {
             trigger_error("La clonación no está permitida", E_USER_ERROR);
         }
 
-        #getter y setter de los atrubutos
-        public function setId($id)
+        # getter y setter de los atrubutos
+        public function setId($id): void
         {
             $this->id = $id;
         }
-        public function getId($id)
+
+        public function getId($id): int
         {
             return $this->id;
         }
 
-        public function setNombre($nombre)
+        public function setNombre($nombre): void
         {
             $this->nombre = $nombre;
         }
-        public function getNombre($nombre)
+
+        public function getNombre($nombre): string
         {
             return $this->nombre;
         }
 
-        public function setTelefono($telefono)
+        public function setTelefono($telefono): void
         {
             $this->telefono = $telefono;
         }
-        public function getTelefono($telefono)
+
+        public function getTelefono($telefono): string
         {
             return $this->telefono;
         }
 
-        public function setEmail($email)
+        public function setEmail($email): void
         {
             $this->email = $email;
         }
-        public function getEmail($email)
+
+        public function getEmail($email): string
         {
             return $this->email;
         }
 
-        public function setCreatedAt($createdAt)
-        {
-            $this->createdAt = $createdAt;
-        }
-        public function getCreatedAt($createdAt)
+        public function getCreatedAt($createdAt): string
         {
             return $this->createdAt;
         }
 
-        public function setUpdatedAt($updatedAt)
+        public function setUpdatedAt($updatedAt): void
         {
             $this->updatedAt = $updatedAt;
         }
-        public function getUpdatedAt($updatedAt)
+
+        public function getUpdatedAt($updatedAt): string
         {
             return $this->updatedAt;
         }
 
         /**
-         * Sets the data for the Contactos model.
+         * Sets the values of the contact properties and inserts a new contact record into the database.
          *
-         * @param array $sh_data The data to be set.
+         * @param array $contact_data The data array containing the contact information.
          * @return void
          */
-        public function set($sh_data = array()) : void
+        public function set($contact_data = array()): void
         {
             $this->query = "INSERT INTO contactos (nombre, telefono, email) VALUES (:nombre, :telefono, :email)";
             $this->params["nombre"] = $this->nombre;
@@ -106,11 +116,11 @@
         }
 
         /**
-         * Retrieves all contact records.
+         * Retrieves all contact records from the database.
          *
          * @return array An array containing all contact records.
          */
-        public function getAll() : array
+        public function getAll(): array
         {
             $this->query = "SELECT * FROM contactos";
             $this->getResultsFromQuery();
@@ -118,12 +128,12 @@
         }
 
         /**
-         * Retrieves contact information.
+         * Retrieves a contact from the database based on the given ID.
          *
-         * @param string $id The ID of the contact to retrieve. If empty, retrieves all contacts.
-         * @return array An array containing the contact information.
+         * @param string $id The ID of the contact to retrieve. Defaults to an empty string.
+         * @return array|null The contact data as an associative array, or null if the contact is not found.
          */
-        public function get($id = "") : array
+        public function get($id = ""): array
         {
             if ($id != "") {
                 $this->query = "SELECT * FROM contactos WHERE id = :id";
@@ -143,53 +153,52 @@
             return $this->rows[0] ?? null;
         }
 
-        /**
-         * Edit the contact.
-         *
-         * @return void
-         */
-        public function edit() : void
-        {
-            $this->query = "UPDATE contactos SET nombre=:nombre, telefono=:telefono, email=:email WHERE id=:id";
+    /**
+     * Updates the contact information in the database.
+     *
+     * @return void
+     */
+    public function edit(): void
+    {
+        $this->query = "UPDATE contactos SET nombre=:nombre, telefono=:telefono, email=:email WHERE id=:id";
 
-            $this->params["id"] = $this->id;
-            $this->params["nombre"] = $this->nombre;
-            $this->params["telefono"] = $this->telefono;
-            $this->params["email"] = $this->email;
-            $this->getResultsFromQuery();
+        $this->params["id"] = $this->id;
+        $this->params["nombre"] = $this->nombre;
+        $this->params["telefono"] = $this->telefono;
+        $this->params["email"] = $this->email;
+        $this->getResultsFromQuery();
 
-            $this->mensaje = "Contacto modificado";
-        }
+        $this->mensaje = "Contacto modificado";
+    }
 
-        /**
-         * Deletes a contact.
-         *
-         * @param string $id The ID of the contact to delete.
-         * @return void
-         */
-        public function delete($id = "") : void
-        {
-            $this->query = "DELETE FROM contactos WHERE id = :id";
-            $this->params["id"] = $id;
-            $this->getResultsFromQuery();
-            $this->mensaje = "Contacto eliminado";
-        }
+    /**
+     * Deletes a contact from the database based on the given ID.
+     *
+     * @param string $id The ID of the contact to delete.
+     * @return void
+     */
+    public function delete($id = ""): void
+    {
+        $this->query = "DELETE FROM contactos WHERE id = :id";
+        $this->params["id"] = $id;
+        $this->getResultsFromQuery();
+        $this->mensaje = "Contacto eliminado";
+    }
 
-        
-        /**
-         * Retrieves contact records based on the given name.
-         *
-         * @param string $nombre The name to search for (optional)
-         * @return array The contact records matching the given name
-         */
-        public function getByAll($nombre = "") : array
-        {
-            $this->query = "SELECT * FROM contactos
+    /**
+     * Retrieves contact records from the database based on the provided search criteria.
+     *
+     * @param string $nombre The name or partial name to search for.
+     * @return array An array of contact records matching the search criteria.
+     */
+    public function getByAll($nombre = ""): array
+    {
+        $this->query = "SELECT * FROM contactos
             WHERE nombre LIKE :nombre OR telefono LIKE :telefono OR email LIKE :email";
-            $this->params["nombre"] = "%$nombre%";
-            $this->params["telefono"] = "%$nombre%";
-            $this->params["email"] = "%$nombre%";
-            $this->getResultsFromQuery();
-            return $this->rows;
-        }
+        $this->params["nombre"] = "%$nombre%";
+        $this->params["telefono"] = "%$nombre%";
+        $this->params["email"] = "%$nombre%";
+        $this->getResultsFromQuery();
+        return $this->rows;
+    }
     }

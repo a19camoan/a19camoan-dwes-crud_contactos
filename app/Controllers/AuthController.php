@@ -20,7 +20,7 @@
                     $_SESSION["usuario"] = $auth;
                 }
             }
-            header("Location: ../");
+            header(REDIRECT_URL);
             ob_end_flush();
         }
 
@@ -28,6 +28,6 @@
         {
             session_unset();
             session_destroy();
-            header("Location: ../");
+            header(REDIRECT_URL);
         }
     }
