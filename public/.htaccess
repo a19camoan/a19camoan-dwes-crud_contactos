@@ -1,6 +1,7 @@
 RewriteEngine On
 RewriteRule ^(test)($|/) - [L]
 RewriteRule ^(css)($|/) - [L]
+RewriteRule ^(js)($|/) - [L]
 RewriteRule (.*) index.php
 RewriteCond %{HTTP:Authorization} ^(.+)$
 RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]

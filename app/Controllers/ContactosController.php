@@ -5,7 +5,13 @@
 
     class ContactosController extends BaseController
     {
-        public function indexAction($request)
+        /**
+         * Renders the index view of the ContactosController.
+         *
+         * @param mixed $request The request object.
+         * @return void
+         */
+        public function indexAction($request) : void
         {
             $contacto = Contactos::getInstancia();
             $data = ["contacto" => $contacto->getAll()];
@@ -13,7 +19,17 @@
             $this->renderHTML("../app/Views/index_view.php", $data);
         }
 
-        public function setAction()
+        /**
+         * Sets the action for adding a contact.
+         *
+         * This method is responsible for handling the logic when adding a contact.
+         * It retrieves the contact details from the POST request, sanitizes the input,
+         * and sets the contact details using the Contactos class. Finally, it redirects
+         * the user to the specified URL.
+         *
+         * @return void
+         */
+        public function setAction() : void
         {
             $data["perfil"] = $_SESSION["perfil"];
 
@@ -37,7 +53,13 @@
             }
         }
 
-        public function delAction($request)
+        /**
+         * Deletes a contact based on the given request.
+         *
+         * @param string $request The request containing the contact ID.
+         * @return void
+         */
+        public function delAction($request) : void
         {
             ob_start();
             $id = explode("/", $request);
@@ -51,7 +73,17 @@
             exit;
         }
 
-        public function editAction($request)
+        /**
+         * Edit action for the ContactosController.
+         *
+         * This method is responsible for handling the edit functionality for a contact.
+         * It retrieves the contact details from the database, processes the form data,
+         * and updates the contact information if the form is submitted successfully.
+         *
+         * @param string $request The request URL.
+         * @return void
+         */
+        public function editAction($request) : void
         {
             ob_start();
             $data["perfil"] = $_SESSION["perfil"];
@@ -104,11 +136,26 @@
             }
         }
 
-        public function searchAction()
+        /**
+         * Search action method.
+         * Retrieves contact data based on a search query and renders the index view.
+         *
+         * @return void
+         */
+        public function searchAction() : void
         {
             $data["perfil"] = $_SESSION["perfil"];
             $contacto = Contactos::getInstancia();
             $data["contacto"] = $contacto->getByAll($_GET["q"]);
             $this->renderHTML("../app/Views/index_view.php", $data);
+        }
+
+        public function searchActionAjax()
+        {
+            $contacto = Contactos::getInstancia();
+
+            header('Content-Type: application/json');
+            echo json_encode($contacto->getByAll($_GET["q"]));
+            var_dump(json_encode($contacto->getByAll($_GET["q"])));
         }
     }

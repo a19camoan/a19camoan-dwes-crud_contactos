@@ -66,6 +66,13 @@
         "action" => [ContactosController::class, "searchAction"],
         "auth" => ["invitado","usuario"]
     ]);
+    # Lo usamos para la búsqueda AJAX
+    $router->add([
+        "name" => "find",
+        "path" => "/^\/find\?q=.+$/",
+        "action" => [ContactosController::class, "searchActionAjax"],
+        "auth" => ["invitado","usuario"]
+    ]);
 
     $request = $_SERVER["REQUEST_URI"];
     $route = $router->match($request);

@@ -8,9 +8,13 @@
     <link rel="icon" type="image/x-icon" href="https://cdn-icons-png.flaticon.com/512/784/784856.png">
     <link rel="stylesheet" href="./css/normalize.css">
     <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/ajax_find.js"></script>
 </head>
 
 <body>
+    <noscript>
+        <p>Su navegador no es compatible con scripts</p>
+    </noscript>
     <header>
         <h1>Contactos</h1>
         <nav>
@@ -25,9 +29,8 @@
                 ?>
             </ul>
         </nav>
-        <form action="http://localhost/search" method="get">
+        <form action="" method="get">
             <input type="text" name="q" id="nombre" placeholder="Buscar contacto" minlength="3" required>
-            <input type="submit" value="Buscar">
         </form>
     </header>
     <main>
